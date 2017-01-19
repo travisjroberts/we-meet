@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Calendar</title>
+    <link rel="stylesheet" type="text/css" href="problems.css" />
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="moment.js"></script>
+    <script type="text/javascript">
+        var displayWeek;
+        var displayYear;
+
+        // Shorthand for $( document ).ready().
+        $(function() {
+            console.log("ready!");
+            currentWeek();
+        });
+
+        // Decrease week and reload calendar.
+        function previousWeek() {
+            displayWeek = displayWeek - 1;
+            showCalendar();
+        }
+
+        // Load calendar for this week.
+        function currentWeek() {
+            // moment.js is a library to make working with dates easier.
+            displayWeek = parseInt(moment().format('W'));
+            displayYear = parseInt(moment().format('Y'));
+            showCalendar();
+        }
+
+        // Increase week and reload calendar.
+        function nextWeek() {
+            displayWeek = displayWeek + 1;
+            showCalendar();
+        }
+
+        function showCalendar() {
+            // jQuery    
+            $.ajax({
+                type: "GET",
+                url: "show_calendar.php",
+                data: {
+                    week: displayWeek,
+                    year: displayYear
+                },
+                success: function(data) {
+                    $("#calendar").html(data);
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <button onclick="previousWeek()">Previous Week</button>
+    <button onclick="currentWeek()">Current Week</button>
+    <button onclick="nextWeek()">Next Week</button>
+    <div id="calendar"></div>
+</body>
+
+</html>
