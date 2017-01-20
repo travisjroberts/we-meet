@@ -53,6 +53,19 @@
                 }
             });
         }
+        // http://momentjs.com/docs/
+        function toggleTime(td, epoch) {
+            alert(moment.unix(epoch).format('LLLL'));
+            // Step 1: install.php (Create DB)
+            // Step 2: addTime.php (takes in variables and stores in DB)
+            // Step 3: Ajax ---
+            // Store in database using ajax
+            // Pass user_id (can be hard coded)
+            // Pass year, week and time
+            // --- End ajax
+            $(td).css('background-color', 'red');
+        }
+
     </script>
 </head>
 
