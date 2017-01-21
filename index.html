@@ -2,78 +2,94 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Calendar</title>
-    <link rel="stylesheet" type="text/css" href="problems.css" />
-    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Calendar</title>
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="moment.js"></script>
-    <script type="text/javascript">
-        var displayWeek;
-        var displayYear;
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="moment.js"></script>
+	<script type="text/javascript">
+		var displayWeek;
+		var displayYear;
 
-        // Shorthand for $( document ).ready().
-        $(function() {
-            console.log("ready!");
-            currentWeek();
-        });
+		// Shorthand for $( document ).ready().
+		$(function() {
+			console.log("ready!");
+			currentWeek();
+		});
 
-        // Decrease week and reload calendar.
-        function previousWeek() {
-            displayWeek = displayWeek - 1;
-            showCalendar();
-        }
+		// Decrease week and reload calendar.
+		function previousWeek() {
+			displayWeek = displayWeek - 1;
+			showCalendar();
+		}
 
-        // Load calendar for this week.
-        function currentWeek() {
-            // moment.js is a library to make working with dates easier.
-            displayWeek = parseInt(moment().format('W'));
-            displayYear = parseInt(moment().format('Y'));
-            showCalendar();
-        }
+		// Load calendar for this week.
+		function currentWeek() {
+			// moment.js is a library to make working with dates easier.
+			displayWeek = parseInt(moment().format('W'));
+			displayYear = parseInt(moment().format('Y'));
+			showCalendar();
+		}
 
-        // Increase week and reload calendar.
-        function nextWeek() {
-            displayWeek = displayWeek + 1;
-            showCalendar();
-        }
+		// Increase week and reload calendar.
+		function nextWeek() {
+			displayWeek = displayWeek + 1;
+			showCalendar();
+		}
 
-        function showCalendar() {
-            // jQuery    
-            $.ajax({
-                type: "GET",
-                url: "show_calendar.php",
-                data: {
-                    week: displayWeek,
-                    year: displayYear
-                },
-                success: function(data) {
-                    $("#calendar").html(data);
-                }
-            });
-        }
-        // http://momentjs.com/docs/
-        function toggleTime(td, epoch) {
-            alert(moment.unix(epoch).format('LLLL'));
-            // Step 1: install.php (Create DB)
-            // Step 2: addTime.php (takes in variables and stores in DB)
-            // Step 3: Ajax ---
-            // Store in database using ajax
-            // Pass user_id (can be hard coded)
-            // Pass year, week and time
-            // --- End ajax
-            $(td).css('background-color', 'red');
-        }
+		function showCalendar() {
+			// jQuery    
+			$.ajax({
+				type: "GET",
+				url: "show_calendar.php",
+				data: {
+					week: displayWeek,
+					year: displayYear
+				},
+				success: function(data) {
+					$("#calendar").html(data);
+				}
+			});
+		}
+		// http://momentjs.com/docs/
+		function toggleTime(td, epoch) {
+			// Store in database using ajax
+			// Create your variables
+			var timestamp = epoch;
+			console.log(timestamp);
 
-    </script>
+			var year = moment.unix(epoch).format('YYYY');
+			console.log(year);
+
+			var week = moment.unix(epoch).format('w');
+			console.log(week);
+
+			var hour = moment.unix(epoch).format('H');
+			console.log(hour);
+
+			var minutes = moment.unix(epoch).format('m');
+			console.log(minutes);
+
+			var user_id = 1; // Hard coded for now
+
+			//TODO: Send variables via AJAX to add_time.php
+
+
+			// --- End ajax
+
+			$(td).css('background-color', 'green');
+
+		}
+
+	</script>
 </head>
 
 <body>
-    <button onclick="previousWeek()">Previous Week</button>
-    <button onclick="currentWeek()">Current Week</button>
-    <button onclick="nextWeek()">Next Week</button>
-    <div id="calendar"></div>
+	<button onclick="previousWeek()">Previous Week</button>
+	<button onclick="currentWeek()">Current Week</button>
+	<button onclick="nextWeek()">Next Week</button>
+	<div id="calendar"></div>
 </body>
 
 </html>
