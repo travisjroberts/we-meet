@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCKTYPE html>
 <html>
 
 <head>
@@ -12,27 +12,27 @@
 		var displayWeek;
 		var displayYear;
 
-		// Shorthand for $( document ).ready().
+		// Shorthand for $( document ).ready()
 		$(function() {
 			console.log("ready!");
 			currentWeek();
 		});
 
-		// Decrease week and reload calendar.
+		// Decrease week and reload calendar
 		function previousWeek() {
 			displayWeek = displayWeek - 1;
 			showCalendar();
 		}
 
-		// Load calendar for this week.
+		// Load calendar for this week
 		function currentWeek() {
-			// moment.js is a library to make working with dates easier.
+			// moment.js is a library to make working with dates easier
 			displayWeek = parseInt(moment().format('W'));
 			displayYear = parseInt(moment().format('Y'));
 			showCalendar();
 		}
 
-		// Increase week and reload calendar.
+		// Increase week and reload calendar
 		function nextWeek() {
 			displayWeek = displayWeek + 1;
 			showCalendar();
@@ -62,8 +62,11 @@
 			var year = moment.unix(epoch).format('YYYY');
 			console.log(year);
 
-			var week = moment.unix(epoch).format('w');
+			var week = moment.unix(epoch).format('W');
 			console.log(week);
+
+			var day = moment.unix(epoch).format('DDD');
+			console.log(day);
 
 			var hour = moment.unix(epoch).format('H');
 			console.log(hour);
@@ -73,13 +76,27 @@
 
 			var user_id = 1; // Hard coded for now
 
-			//TODO: Send variables via AJAX to add_time.php
+			// Send variables via AJAX to add_time.php
+			$.ajax({
+				type: "GET",
+				url: "add_time.php",
+				data: {
+					time_stamp: timestamp,
+					year: year,
+					week: week,
+					day: day,
+					hour: hour,
+					minutes: minutes,
+					user_id: user_id
+				},
+				success: function(data) {
 
+				}
+			});
 
 			// --- End ajax
 
 			$(td).css('background-color', 'green');
-
 		}
 
 	</script>

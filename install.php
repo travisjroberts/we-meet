@@ -7,10 +7,11 @@
                         time_stamp REAL NOT NULL,
                         year INTEGER NOT NULL,
                         week INTEGER NOT NULL,
+                        day INTEGER NOT NULL,
                         hour INTEGER NOT NULL,
                         minutes INTEGER NOT NULL,
                         user_id INTEGER NOT NULL,
-                        PRIMARY KEY (year, week, hour, minutes, user_id)
+                        PRIMARY KEY (year, week, day, hour, minutes, user_id)
                       );";
 
     $database->query($query_string);
