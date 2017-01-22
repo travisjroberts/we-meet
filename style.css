@@ -1,0 +1,58 @@
+html, body {
+	background: #000;
+	height: 100%;
+	width: 100%;
+    color: #c9c9c9;
+}
+.dark {
+	background: #333!important; /* Should not need to use this */
+    color: #c9c9c9;
+}
+
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+	min-width: 870px;
+	height: 100%;
+	background-color: #111;
+}
+td, th {
+	border: 1px solid #000!important;
+	text-align: center;
+	padding: 8px;
+}
+tr:nth-child(even) {
+	background-color: #222;
+}
+a {
+	text-decoration: none;
+}
+.buttons-container {
+	cursor: pointer;
+	width: 100%;
+	min-width: 870px;
+}
+.button {
+	padding: 10px 0px 10px 0px;
+	text-align: center;
+	background-color: #c9c9c9;
+	width: 20%;
+	float: right;
+	border-left: 1px solid #000;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+    color: #111111;
+}
+
+.button:hover {
+	background-color: blue;
+}
+.logout {
+	background-color: red;
+    color: #c9c9c9;
+}
+.compare {
+    background-color:none;
+}

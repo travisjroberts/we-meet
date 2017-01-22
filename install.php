@@ -3,6 +3,17 @@
     $database = new SQLite3("database.db"); 
 
     // Begin Create
+    $query_string = "CREATE TABLE IF NOT EXISTS users (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                        username TEXT NOT NULL,
+                        hash TEXT NOT NULL,
+                        token TEXT NOT NULL
+                      );";
+
+    $database->query($query_string);
+    // End Create
+
+    // Begin Create
     $query_string = "CREATE TABLE IF NOT EXISTS availability (
                         time_stamp REAL NOT NULL,
                         year INTEGER NOT NULL,
@@ -15,7 +26,6 @@
                       );";
 
     $database->query($query_string);
-    echo "Database created";
     // End Create
 
 

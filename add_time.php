@@ -1,11 +1,12 @@
 <?php
+	session_start();
     $year = "";
     $week = "";
     $day = "";
     $hour = "";
     $minutes = "";
     $time_stamp = "";
-    $user_id = "";
+    $user_id = $_SESSION['user_id'];
     $valid = true;
 
     function clean_input($data) {
@@ -22,7 +23,6 @@
       $hour = clean_input($_GET['hour']);
       $minutes = clean_input($_GET['minutes']);
       $time_stamp = clean_input($_GET['time_stamp']);
-      $user_id = clean_input($_GET['user_id']);
     } else {
       $valid = false;
     }
@@ -37,7 +37,7 @@
                          VALUES ('$time_stamp', '$year', '$week', '$day', '$hour', '$minutes', '$user_id');";
 
         $database->query($query_string);
-        echo "Success. ";
+        echo "Success $user_id. ";
         // End INSERT
 
         // Close the database
